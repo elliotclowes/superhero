@@ -12,9 +12,12 @@ const SuperheroCard = ({ superhero }) => {
     <div>
       <h2>{superhero.name}</h2>
       <img src={superhero.image.url} alt={superhero.name} />
-      {Object.entries(powerstats).map(([stat, value]) => (
-        <p key={stat}>{stat}: {value}</p>
-      ))}
+      {Object.entries(powerstats)
+        .filter(([stat, value]) => value !== null)
+        .map(([stat, value]) => (
+          <p key={stat}>{stat}: {value}</p>
+        ))
+      }
     </div>
   );
 };
