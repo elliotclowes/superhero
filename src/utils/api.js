@@ -28,8 +28,9 @@ export const useFetchSuperheroes = () => {
   };
 
   const hasNullPowerstats = (superhero) => {
-    return Object.values(superhero.powerstats).some((value) => value === null);
+    return Object.values(superhero.powerstats).some((value) => value === null || value === 'null');
   };
+  
 
   useEffect(() => {
     fetchSuperheroes();
