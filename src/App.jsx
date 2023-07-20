@@ -3,15 +3,37 @@ import SuperheroCard from './components/SuperheroCard';
 import StatComparison from './components/StatComparison';
 import GuessButton from './components/GuessButton';
 import UserCollection from './components/UserCollection';
+import GuessFeedback from './components/GuessFeedback';
 import { useFetchSuperheroes } from './utils/api';
 
 const App = () => {
   const { superhero1, superhero2 } = useFetchSuperheroes();
   const [hiddenStat, setHiddenStat] = useState(null);
   const [collectedSuperheroes, setCollectedSuperheroes] = useState([]);
+  const [guessFeedback, setGuessFeedback] = useState('');
 
   const makeGuess = (id) => {
-    // implement the logic for what should happen when a user makes a guess.
+    const guessedSuperhero = id === superhero1.id ? superhero1 : superhero2;
+    const otherSuperhero = id === superhero1.id ? superhero2 : superhero1;
+
+    const isGuessCorrect = guessedSuperhero.powerstats[hiddenStat] > otherSuperhero.powerstats[hiddenStat];
+
+    if (isGuessCorrect) {
+      // Handle correct guess
+      const message = `Correct! ${guessedSuperhero.name} has been added to your collection.`;
+      setCollectedSuperheroes((prevCollectedSuperheroes) => [...prevCollectedSuperheroes, guessedSuperhero]);
+      setGuessFeedback(message);
+    } else {
+      // Handle wrong guess
+      const message = `Wrong! You've lost a random card from your collection.`;
+      if (collectedSuperheroes.length > 0) {
+        const updatedCollection = [...collectedSuperheroes];
+        const randomIndex = Math.floor(Math.random() * updatedCollection.length);
+        updatedCollection.splice(randomIndex, 1);
+        setCollectedSuperheroes(updatedCollection);
+      }
+      setGuessFeedback(message);
+    }
   };
 
   useEffect(() => {
@@ -30,6 +52,7 @@ const App = () => {
       <StatComparison stat={hiddenStat} />
       <GuessButton superhero={superhero1} makeGuess={makeGuess} />
       <GuessButton superhero={superhero2} makeGuess={makeGuess} />
+      <GuessFeedback guessFeedback={guessFeedback} />
       <UserCollection collectedSuperheroes={collectedSuperheroes} />
     </div>
   );

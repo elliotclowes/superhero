@@ -12,7 +12,7 @@ const GuessButton = ({ superhero, makeGuess }) => {
 
   return (
     <button onClick={handleGuess}>
-      Guess if {superhero.name} has the higher stat
+      {superhero.name}
     </button>
   );
 };
