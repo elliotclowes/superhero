@@ -5,7 +5,7 @@ const GuessFeedback = ({ guessFeedback }) => {
     return null;
   }
 
-  return <p className="guess-feedback">{guessFeedback}</p>;
+  return <h3 className="guess-feedback">{guessFeedback}</h3>;
 };
 
 export default GuessFeedback;
