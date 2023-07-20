@@ -1,5 +1,9 @@
 import React from 'react';
 
+const capitalizeFirstLetter = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 const SuperheroCard = ({ superhero, hiddenStat, isFading }) => {
   if (!superhero) {
     // The superhero data is not yet loaded.
@@ -17,7 +21,7 @@ const SuperheroCard = ({ superhero, hiddenStat, isFading }) => {
         .filter(([stat, value]) => value !== null)
         .map(([stat, value]) => (
           <p key={stat}>
-            {stat === hiddenStat ? `${stat}: ???` : `${stat}: ${value}`}
+            {stat === hiddenStat ? `${capitalizeFirstLetter(stat)}: ???` : `${capitalizeFirstLetter(stat)}: ${value}`}
           </p>
         ))}
       <h3>Appearance</h3>
