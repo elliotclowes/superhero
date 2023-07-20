@@ -14,6 +14,7 @@ const App = () => {
   const [collectedSuperheroes, setCollectedSuperheroes] = useState([]);
   const [guessFeedback, setGuessFeedback] = useState('');
   const [guessMade, setGuessMade] = useState(false);
+  const [isFading, setIsFading] = useState(false); // Added isFading state
 
   const makeGuess = (id) => {
     const guessedSuperhero = id === superhero1.id ? superhero1 : superhero2;
@@ -39,12 +40,20 @@ const App = () => {
     setGuessMade(true);
   };
 
-  const handleGoAgain = () => {
-    fetchSuperheroes();
-    setGuessMade(false);
-    setGuessFeedback('');
+  const handleGoAgain = async () => {
+    setIsFading(true); // Set the flag to trigger the fade-out effect
+  
+    // Fetch new superheroes
+    await fetchSuperheroes();
+  
+    setTimeout(() => {
+      setGuessMade(false);
+      setGuessFeedback('');
+      setIsFading(false); // Reset the flag to fade-in the cards
+    }, 2000); // Wait for 2 seconds before fading back in
   };
-
+  
+  
   useEffect(() => {
     const getRandomStat = () => {
       const stats = Object.keys(superhero1?.powerstats || {});
@@ -57,8 +66,8 @@ const App = () => {
   return (
     <div>
       <div className="container">
-        <SuperheroCard superhero={superhero1} hiddenStat={hiddenStat} />
-        <SuperheroCard superhero={superhero2} hiddenStat={hiddenStat} />
+        <SuperheroCard superhero={superhero1} hiddenStat={hiddenStat} isFading={isFading} />
+        <SuperheroCard superhero={superhero2} hiddenStat={hiddenStat} isFading={isFading} />
       </div>
       <StatComparison stat={hiddenStat} />
       {guessMade && (

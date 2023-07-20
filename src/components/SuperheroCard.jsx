@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SuperheroCard = ({ superhero, hiddenStat }) => {
+const SuperheroCard = ({ superhero, hiddenStat, isFading }) => {
   if (!superhero) {
     // The superhero data is not yet loaded.
     return null;
@@ -9,7 +9,7 @@ const SuperheroCard = ({ superhero, hiddenStat }) => {
   const { name, image, powerstats, appearance } = superhero;
 
   return (
-    <div className="card">
+    <div className={`card ${isFading ? 'fade-out' : ''}`}>
       <h2>{name}</h2>
       <img src={image.url} alt={name} width="200px" />
       <h3>Stats</h3>
