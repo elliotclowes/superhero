@@ -19,6 +19,7 @@ const App = () => {
     // Fetch initial data when the component mounts.
     // You might also set the initial stat here.
   }, []);
+  
 
   return (
     <div>
