@@ -17,7 +17,7 @@ const SuperheroCard = ({ superhero, hiddenStat }) => {
         .filter(([stat, value]) => value !== null)
         .map(([stat, value]) => (
           <p key={stat}>
-            {stat === hiddenStat ? 'Hidden Stat' : `${stat}: ${value}`}
+            {stat === hiddenStat ? `${stat}: ???` : `${stat}: ${value}`}
           </p>
         ))}
       <h3>Appearance</h3>
