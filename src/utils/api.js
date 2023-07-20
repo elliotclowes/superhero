@@ -10,35 +10,32 @@ export const useFetchSuperheroes = () => {
   const [superhero1, setSuperhero1] = useState(null);
   const [superhero2, setSuperhero2] = useState(null);
 
-  useEffect(() => {
+  const fetchSuperheroes = async () => {
     const getRandomId = () => Math.floor(Math.random() * 731) + 1;
-    
-    const fetchSuperheroes = async () => {
-      let fetchedSuperhero1 = await fetchSuperhero(getRandomId());
 
-      while (hasNullPowerstats(fetchedSuperhero1)) {
-        fetchedSuperhero1 = await fetchSuperhero(getRandomId());
-      }
+    let fetchedSuperhero1 = await fetchSuperhero(getRandomId());
+    while (hasNullPowerstats(fetchedSuperhero1)) {
+      fetchedSuperhero1 = await fetchSuperhero(getRandomId());
+    }
 
-      let fetchedSuperhero2 = await fetchSuperhero(getRandomId());
+    let fetchedSuperhero2 = await fetchSuperhero(getRandomId());
+    while (hasNullPowerstats(fetchedSuperhero2) || fetchedSuperhero2.id === fetchedSuperhero1.id) {
+      fetchedSuperhero2 = await fetchSuperhero(getRandomId());
+    }
 
-      while (hasNullPowerstats(fetchedSuperhero2) || fetchedSuperhero2.id === fetchedSuperhero1.id) {
-        fetchedSuperhero2 = await fetchSuperhero(getRandomId());
-      }
-      
-      setSuperhero1(fetchedSuperhero1);
-      setSuperhero2(fetchedSuperhero2);
-    };
+    setSuperhero1(fetchedSuperhero1);
+    setSuperhero2(fetchedSuperhero2);
+  };
 
-    const hasNullPowerstats = (superhero) => {
-      return Object.values(superhero.powerstats).some((value) => value === null || value === "null");
-    };
-      
+  const hasNullPowerstats = (superhero) => {
+    return Object.values(superhero.powerstats).some((value) => value === null);
+  };
 
+  useEffect(() => {
     fetchSuperheroes();
   }, []);
 
-  return { superhero1, superhero2 };
+  return { superhero1, superhero2, fetchSuperheroes }; // Include fetchSuperheroes in the return value
 };
 
 export default useFetchSuperheroes;

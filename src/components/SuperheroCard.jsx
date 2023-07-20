@@ -9,7 +9,7 @@ const SuperheroCard = ({ superhero, hiddenStat }) => {
   const { name, image, powerstats, appearance } = superhero;
 
   return (
-    <div>
+    <div className="card">
       <h2>{name}</h2>
       <img src={image.url} alt={name} width="200px" />
       <h3>Stats</h3>

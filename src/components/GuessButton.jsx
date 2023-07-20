@@ -11,7 +11,7 @@ const GuessButton = ({ superhero, makeGuess }) => {
   };
 
   return (
-    <button onClick={handleGuess}>
+    <button className="guess-button" onClick={handleGuess}>
       {superhero.name}
     </button>
   );
