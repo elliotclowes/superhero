@@ -3,6 +3,7 @@ const UserCollection = ({ collectedSuperheroes }) => {
 
   return (
     <div className="user-collection-wrapper">
+      <hr></hr><br></br>
       <h2>{hasCollection}</h2>
       <div className="user-collection">
         {collectedSuperheroes.map((superhero) => (

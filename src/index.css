@@ -12,10 +12,43 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.header {
+  padding: 2px 30px;
+  display: flex;
+  justify-content: center; /* Horizontally center all items */
+  align-items: center; /* Vertically center all items */
+  background: linear-gradient(to right, #5526ad, #535bf2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.header h1 {
+  color: #f7f7f7;
+  font-size: 2.5em;
+  text-align: center; /* Horizontally center the text */
+}
+
+
+.footer {
+  margin-top: 50px;
+  padding: 3px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #7f59d2;
+}
+
+.footer p{
+  color: #eae7e7;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
 }
 
 a:hover {
@@ -30,6 +63,8 @@ body {
   min-height: 100vh;
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
+  padding: 1em;
+  background-color: #f9f9f9;
 }
 
 h1 {
@@ -44,13 +79,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #535bf2;
+  color: #fff;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s;
 }
 
 button:hover {
-  border-color: #646cff;
+  background-color: #646cff;
 }
 
 button:focus,
@@ -70,6 +106,13 @@ button:focus-visible {
 
   button {
     background-color: #f9f9f9;
+    color: #535bf2;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.5em;
   }
 }
 
@@ -90,6 +133,7 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   transition: opacity 0.7s;
+  max-width: 90%;
 }
 
 .card.fade-out {
@@ -99,6 +143,8 @@ button:focus-visible {
 
 .card h2 {
   margin-top: 0;
+  font-size: 26px;
+  color: #2e1954;
 }
 
 .card img {
@@ -115,13 +161,14 @@ button:focus-visible {
 
 .card p {
   margin: 0.2em 0;
+  color: #494e54;
 }
-
 
 .stat-comparison {
   font-weight: bold;
   text-align: center;
   margin-top: 1em;
+  font-size: 25px;
 }
 
 .guess-button-container {
@@ -132,22 +179,25 @@ button:focus-visible {
 }
 
 .guess-button {
-  background-color: #646cff;
+  background-color: #5526ad;
   color: #fff;
-  border-color: #646cff;
+  border-color: #5526ad;
   transition: background-color 0.25s;
   margin-right: 1em;
+  font-size: 18px;
 }
 
 .guess-button:hover {
-  background-color: #535bf2;
-  border-color: #535bf2;
+  background-color: #854fd8;
+  border-color: #854fd8;
 }
 
 .guess-feedback {
-  margin-top: 1em;
+  margin: 1em auto;
   font-weight: bold;
   text-align: center;
+  font-size: 25px;
+  width: 600px;
 }
 
 
@@ -167,6 +217,8 @@ button:focus-visible {
   justify-items: center;
   align-items: center;
   margin-top: 2em;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  font-size: 17px;
 }
 
 .user-collection h2 {

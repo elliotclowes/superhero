@@ -6,6 +6,9 @@ import GuessButton from './components/GuessButton';
 import UserCollection from './components/UserCollection';
 import GuessFeedback from './components/GuessFeedback';
 
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 import { useFetchSuperheroes } from './utils/api';
 
 const App = () => {
@@ -63,39 +66,43 @@ const App = () => {
   }, [superhero1]);
 
   return (
-    <div>
-      <div className="container">
-        {superhero1 && superhero2 && (
-          <>
-            <SuperheroCard superhero={superhero1} hiddenStat={hiddenStat} isFading={isFading} />
-            <SuperheroCard superhero={superhero2} hiddenStat={hiddenStat} isFading={isFading} />
-          </>
+    <div className="app">
+      <Header />
+      <main className="main">
+        <div className="container">
+          {superhero1 && superhero2 && (
+            <>
+              <SuperheroCard superhero={superhero1} hiddenStat={hiddenStat} isFading={isFading} />
+              <SuperheroCard superhero={superhero2} hiddenStat={hiddenStat} isFading={isFading} />
+            </>
+          )}
+        </div>
+        {hiddenStat && !guessMade && (
+          <StatComparison stat={hiddenStat} superhero1={superhero1} superhero2={superhero2} />
         )}
-      </div>
-      {hiddenStat && !guessMade && (
-        <StatComparison stat={hiddenStat} superhero1={superhero1} superhero2={superhero2} />
-      )}
-      {guessMade && (
-        <div>
-          <GuessFeedback guessFeedback={guessFeedback} />
-          <div className="guess-button-container">
-            <button className="guess-button" onClick={handleGoAgain}>
-              Go again
-            </button>
+        {guessMade && (
+          <div>
+            <GuessFeedback guessFeedback={guessFeedback} />
+            <div className="guess-button-container">
+              <button className="guess-button" onClick={handleGoAgain}>
+                Go again
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      {!guessMade && (
-        <div className="guess-button-container">
-          {superhero1 && (
-            <GuessButton superhero={superhero1} makeGuess={makeGuess} disabled={guessMade} />
-          )}
-          {superhero2 && (
-            <GuessButton superhero={superhero2} makeGuess={makeGuess} disabled={guessMade} />
-          )}
-        </div>
-      )}
-      <UserCollection collectedSuperheroes={collectedSuperheroes} />
+        )}
+        {!guessMade && (
+          <div className="guess-button-container">
+            {superhero1 && (
+              <GuessButton superhero={superhero1} makeGuess={makeGuess} disabled={guessMade} />
+            )}
+            {superhero2 && (
+              <GuessButton superhero={superhero2} makeGuess={makeGuess} disabled={guessMade} />
+            )}
+          </div>
+        )}
+        <UserCollection collectedSuperheroes={collectedSuperheroes} />
+      </main>
+      <Footer />
     </div>
   );
 };
