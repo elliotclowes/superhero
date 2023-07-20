@@ -35,7 +35,7 @@ export const useFetchSuperheroes = () => {
     fetchSuperheroes();
   }, []);
 
-  return { superhero1, superhero2, fetchSuperheroes }; // Include fetchSuperheroes in the return value
+  return { superhero1, superhero2, fetchSuperheroes };
 };
 
 export default useFetchSuperheroes;
