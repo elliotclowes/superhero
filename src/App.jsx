@@ -7,28 +7,30 @@ import { useFetchSuperheroes } from './utils/api';
 
 const App = () => {
   const { superhero1, superhero2 } = useFetchSuperheroes();
-  const [stat, setStat] = useState('');
+  const [hiddenStat, setHiddenStat] = useState(null);
   const [collectedSuperheroes, setCollectedSuperheroes] = useState([]);
 
   const makeGuess = (id) => {
-    // Here you can implement the logic for what should happen when a user makes a guess.
-    // For example, if the guess is correct, you could add the superhero to the collectedSuperheroes state.
+    // implement the logic for what should happen when a user makes a guess.
   };
 
   useEffect(() => {
-    // Fetch initial data when the component mounts.
-    // You might also set the initial stat here.
-  }, []);
-  
+    const getRandomStat = () => {
+      const stats = Object.keys(superhero1?.powerstats || {});
+      return stats[Math.floor(Math.random() * stats.length)];
+    };
+
+    setHiddenStat(getRandomStat());
+  }, [superhero1]);
 
   return (
     <div>
-      <SuperheroCard superhero={superhero1} stat={stat} />
-      <SuperheroCard superhero={superhero2} stat={stat} />
-      {/* <StatComparison stat={stat} />
+      <SuperheroCard superhero={superhero1} hiddenStat={hiddenStat} />
+      <SuperheroCard superhero={superhero2} hiddenStat={hiddenStat} />
+      <StatComparison stat={hiddenStat} />
       <GuessButton superhero={superhero1} makeGuess={makeGuess} />
       <GuessButton superhero={superhero2} makeGuess={makeGuess} />
-      <UserCollection collectedSuperheroes={collectedSuperheroes} /> */}
+      <UserCollection collectedSuperheroes={collectedSuperheroes} />
     </div>
   );
 };
